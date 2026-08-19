@@ -1,0 +1,4 @@
+---
+const steps=[['Sampaikan kebutuhan','Isi jenis unit, gejala, lokasi, dan tingkat urgensi.'],['Klarifikasi awal','Informasi ditinjau dan detail tambahan diminta bila diperlukan.'],['Rencana tindak lanjut','Pemeriksaan atau layanan disusun sesuai kebutuhan yang teridentifikasi.'],['Laporan dan rekomendasi','Ringkasan pekerjaan serta tindak lanjut yang disarankan diberikan.']];
+---
+<ol class="service-timeline">{steps.map((step,i)=><li><span>{String(i+1).padStart(2,'0')}</span><div><h3>{step[0]}</h3><p>{step[1]}</p></div></li>)}</ol>

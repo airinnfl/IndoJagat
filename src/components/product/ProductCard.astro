@@ -1,0 +1,9 @@
+---
+import type {Product} from '../../types';
+interface Props {product:Product;extraClass?:string}
+const {product,extraClass=''}=Astro.props;
+---
+<article class={`card product-card result-card ${extraClass}`} data-industries={product.industries.join('|')}>
+ <a class="product-media" href={`/produk/${product.slug}/`} aria-label={`Lihat detail ${product.shortName}`}><img class="card-media" src={product.image} alt={product.imageAlt} width="600" height="450" loading="lazy"/><span class="product-arrow" aria-hidden="true">↗</span></a>
+ <div class="card-body"><p class="eyebrow">{product.category}</p><h3><a href={`/produk/${product.slug}/`}>{product.shortName}</a></h3><p class="product-summary">{product.summary}</p><ul class="specs">{product.keySpecifications.slice(0,3).map(s=><li><strong>{s.label}:</strong> {s.value}</li>)}</ul><a class="product-link" href={`/produk/${product.slug}/`}>Lihat Detail <span aria-hidden="true">→</span></a></div>
+</article>

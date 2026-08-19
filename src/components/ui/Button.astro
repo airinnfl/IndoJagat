@@ -1,0 +1,6 @@
+---
+interface Props{href?:string;variant?:'primary'|'dark'|'light';type?:'button'|'submit'}
+const {href,variant='dark',type='button'}=Astro.props;
+const cls=`btn btn-${variant}`;
+---
+{href?<a class={cls} href={href}><slot/> <span aria-hidden="true">↗</span></a>:<button class={cls} type={type}><slot/></button>}

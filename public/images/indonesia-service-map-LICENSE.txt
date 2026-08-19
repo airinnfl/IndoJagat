@@ -1,0 +1,9 @@
+Indonesia location map.svg
+
+Source: https://commons.wikimedia.org/wiki/File:Indonesia_location_map.svg
+Author: Uwe Dedering; updated by NordNordWest
+Underlying geographic data: Natural Earth
+License: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+License URL: https://creativecommons.org/licenses/by-sa/3.0/
+
+Local modifications: colors adapted to the Indo Jagat design system. Service markers are rendered separately by the Astro component.

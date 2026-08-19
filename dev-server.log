@@ -1,0 +1,36 @@
+
+> indo-jagat@1.0.0 dev
+> astro dev --host 127.0.0.1 --port 4321
+
+[2m15.57.39[22m [34m[types][39m Generated [2m3ms[22m
+[2m15.57.39[22m [34m[content][39m Syncing content
+[2m15.57.39[22m [34m[content][39m Synced content
+
+[42m[1m astro [22m[49m [32mv5.18.2[39m [2mready in[22m 668 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://127.0.0.1:4321/[39m
+
+[2m15.57.39[22m [32mwatching for file changes...[39m
+[2m15.57.41[22m [34m[200][39m / [2m84ms[22m
+[2m15.57.41[22m [34m[200][39m / [2m87ms[22m
+[2m15.58.28[22m [34m[200][39m / [2m41ms[22m
+[2m16.00.00[22m [34m[200][39m /produk/ [2m33ms[22m
+[2m16.10.02[22m [34m[watch][39m src/pages/index.astro
+[31m[1m16.10.03[22m [ERROR][39m Expected ";" but found "im"
+  [1mStack trace:[22m
+[2m    at C:/Users/airin/Downloads/IndoJagat_website/src/data/articles.ts:2:6
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m16.10.03[22m [34m[200][39m /produk/ [2m14ms[22m
+[31m[1m16.10.25[22m [ERROR][39m Expected ";" but found "im"
+  [1mStack trace:[22m
+[2m    at C:/Users/airin/Downloads/IndoJagat_website/src/data/articles.ts:2:6
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m16.10.30[22m [34m[watch][39m /src/styles/global.css
+[31m[1m16.10.30[22m [ERROR][39m Expected ";" but found "im"
+  [1mStack trace:[22m
+[2m    at failureErrorWithLog (C:\Users\airin\Downloads\IndoJagat_website\node_modules\vite\node_modules\esbuild\lib\main.js:1467:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m16.15.22[22m [34m[200][39m / [2m42ms[22m
+[2m16.15.43[22m [34m[200][39m / [2m9ms[22m
+[2m16.15.56[22m [34m[200][39m / [2m10ms[22m
+[2m16.47.19[22m [34m[200][39m / [2m10ms[22m

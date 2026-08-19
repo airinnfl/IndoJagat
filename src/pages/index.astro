@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ProductCard from '../components/product/ProductCard.astro';
+import IndustrySolutionGrid from '../components/industry/IndustrySolutionGrid.astro';
+import {products} from '../data/products';
+import {publishedArticles} from '../data/articles';
+const featured=['mini-excavator','hydraulic-excavator-20-ton','wheel-loader','forklift'].map(slug=>products.find(p=>p.slug===slug)!);
+const latestArticles=publishedArticles().slice(0,3);
+---
+<BaseLayout title="Indo Jagat — Rental Alat Berat untuk Kebutuhan Proyek" description="Katalog rental alat berat untuk konstruksi, perkebunan, warehouse, lifting, dan transportasi." jsonLd={{'@context':'https://schema.org','@type':'Organization',name:'Indo Jagat',url:'https://demo.indojagat.co.id'}}>
+ <section class="hero"><div class="container hero-grid"><div class="hero-copy"><p class="eyebrow">Heavy Equipment & Industrial Solutions</p><h1>Tenaga besar untuk <span>pekerjaan nyata.</span></h1><p class="lead">Rental alat berat, konsultasi kebutuhan unit, inspeksi, dan dukungan teknis dalam satu alur yang jelas.</p><div class="actions"><Button href="/produk/" variant="primary">Jelajahi Produk</Button><Button href="/kontak/" variant="light">Konsultasi Proyek</Button></div></div><img class="hero-image" src="/images/equipment/photo-1504307651254-35680f356dfd.jpg" alt="Excavator bekerja di area proyek konstruksi" width="900" height="700"/></div></section>
+ <section class="section section-muted featured-section"><div class="container"><SectionHeading eyebrow="Produk unggulan" title="Empat unit inti untuk kebutuhan operasional." link="/produk/" linkText="Lihat Katalog Lengkap"/><div class="grid grid-4">{featured.map(p=><ProductCard product={p}/>)}</div></div></section>
+ <section class="section section-dark project-support" aria-labelledby="project-support-title">
+  <div class="container">
+   <div class="project-support-top">
+    <header>
+     <p class="eyebrow">Dukungan proyek</p>
+     <h2 id="project-support-title">Penyediaan unit dengan konteks yang jelas.</h2>
+    </header>
+    <figure class="project-support-visual">
+     <img src="/images/equipment/photo-1660367439240-d38cb03a4365.jpg" alt="Excavator Indo Jagat beroperasi di area proyek" width="1600" height="1064" loading="lazy"/>
+    </figure>
+   </div>
+   <div class="grid pillars project-support-services">
+    <article class="pillar"><p class="eyebrow">01</p><h3>Rental alat berat</h3><p>Unit dipilih berdasarkan aplikasi, kondisi medan, lokasi, dan jadwal proyek.</p></article>
+    <article class="pillar"><p class="eyebrow">02</p><h3>Konsultasi &amp; dukungan</h3><p>Inspeksi, preventive maintenance, field service, mobilisasi, dan koordinasi lifting sesuai kebutuhan.</p></article>
+   </div>
+  </div>
+ </section>
+ <IndustrySolutionGrid/>
+ <section class="section section-off"><div class="container"><SectionHeading eyebrow="Blog & Insight" title="Informasi untuk keputusan operasional." link="/blog/" linkText="Lihat Semua Artikel"/><div class="grid grid-3">{latestArticles.map(article=><article class="card article-card"><img class="card-media" src={article.image} alt={article.imageAlt} loading="lazy" width="720" height="540"/><div class="card-body"><p class="eyebrow">{article.category}</p><h3><a href={`/blog/${article.slug}/`}>{article.title}</a></h3><p>{article.description}</p><a class="product-link" href={`/blog/${article.slug}/`}>Baca Artikel <span aria-hidden="true">→</span></a></div></article>)}</div></div></section>
+ <section class="quote-band"><div class="container"><div><p class="eyebrow">Konsultasi proyek</p><h2>Mulai dari kebutuhan pekerjaan Anda.</h2></div><div class="actions"><Button href="/kontak/" variant="primary">Contact Us</Button><Button href="/produk/" variant="light">Lihat Produk</Button></div></div></section>
+</BaseLayout>

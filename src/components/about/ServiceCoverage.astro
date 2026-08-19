@@ -1,0 +1,72 @@
+---
+import { coverageRegions, serviceCoverage } from '../../data/serviceCoverage';
+---
+
+<section class="service-coverage" aria-labelledby="service-coverage-title">
+  <div class="container">
+    <div class="coverage-layout">
+      <div class="coverage-copy">
+        <p class="eyebrow">CAKUPAN LAYANAN</p>
+        <h2 id="service-coverage-title">Dukungan proyek di beberapa wilayah utama.</h2>
+        <p class="coverage-intro">Koordinasi pengadaan unit, rental, mobilisasi, dan dukungan operasional menyesuaikan kebutuhan equipment, jadwal, serta akses menuju lokasi proyek.</p>
+        <dl class="coverage-summary" aria-label="Ringkasan cakupan demonstrasi">
+          <div><dt>04</dt><dd>Regional</dd></div>
+          <div><dt>08</dt><dd>Wilayah Utama</dd></div>
+        </dl>
+        <p class="coverage-disclaimer coverage-disclaimer--desktop">Wilayah yang ditampilkan merupakan cakupan demonstrasi website dan belum menunjukkan lokasi cabang, depot, atau ketersediaan unit secara real-time.</p>
+      </div>
+
+      <div class="coverage-visual">
+        <div class="map-frame">
+          <svg class="coverage-map" viewBox="0 0 1200 459.574" role="img" aria-labelledby="coverage-map-title coverage-map-description">
+            <title id="coverage-map-title">Peta cakupan demonstrasi layanan Indo Jagat di Indonesia</title>
+            <desc id="coverage-map-description">Peta Indonesia dengan penanda Jabodetabek, Bandung, Semarang, Surabaya, Medan, Palembang, Balikpapan, dan Makassar.</desc>
+            <image href="/images/indonesia-service-map.svg" width="1200" height="459.574" preserveAspectRatio="xMidYMid meet" />
+            {serviceCoverage.map((location) => (
+              <g class={`map-marker marker-${location.city.toLowerCase()}`} transform={`translate(${location.coordinates.x} ${location.coordinates.y})`} tabindex="0" role="img" aria-label={`${location.id}, ${location.city}, regional ${location.region}`}>
+                <circle class="marker-ring" r="14" />
+                <circle class="marker-dot" r="11" />
+                <text y=".5" text-anchor="middle" dominant-baseline="middle">{location.id}</text>
+              </g>
+            ))}
+          </svg>
+        </div>
+
+        <div class="regional-list" aria-label="Daftar wilayah cakupan demonstrasi">
+          {coverageRegions.map((region, index) => (
+            <section class="regional-group">
+              <span class="regional-number">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{region}</h3>
+              <p>{serviceCoverage.filter((item) => item.region === region).map((item) => (
+                <span class={`city-name city-${item.city.toLowerCase()}`} tabindex="0">{item.city}</span>
+              ))}</p>
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+    <p class="coverage-disclaimer coverage-disclaimer--mobile">Wilayah yang ditampilkan merupakan cakupan demonstrasi website dan belum menunjukkan lokasi cabang, depot, atau ketersediaan unit secara real-time.</p>
+  </div>
+</section>
+
+<style>
+  .service-coverage{padding-block:clamp(4rem,7vw,7rem);background:var(--color-limestone);color:var(--color-obsidian);overflow:hidden}
+  .coverage-layout{display:grid;grid-template-columns:minmax(270px,.52fr) minmax(0,1fr);gap:clamp(2.5rem,5vw,5.5rem);align-items:start}
+  .coverage-copy{padding-top:clamp(.5rem,2vw,1.5rem)}
+  .coverage-copy h2{font-size:clamp(2rem,3.6vw,3.5rem);line-height:1.04;max-width:13ch;margin-bottom:1.5rem}
+  .coverage-intro{font-size:clamp(1rem,1.15vw,1.12rem);line-height:1.65;max-width:43ch}
+  .coverage-summary{display:flex;gap:clamp(2rem,4vw,4rem);margin:clamp(2.25rem,4vw,3.75rem) 0 0;padding-top:1.25rem;border-top:1px solid var(--color-pebble)}
+  .coverage-summary div{display:grid;gap:.25rem}.coverage-summary dt{font-size:clamp(1.7rem,2.5vw,2.5rem);font-weight:650;line-height:1;color:var(--color-obsidian)}.coverage-summary dd{margin:0;color:var(--color-gravel);font-size:.76rem;text-transform:uppercase;letter-spacing:.1em}
+  .coverage-disclaimer{font-size:.82rem;line-height:1.6;color:var(--color-gravel);max-width:48ch}.coverage-disclaimer--desktop{margin:2rem 0 0}.coverage-disclaimer--mobile{display:none}
+  .map-frame{background:var(--color-limestone);border:1px solid var(--color-pebble);padding:clamp(.65rem,1.5vw,1.25rem)}
+  .coverage-map{display:block;width:100%;height:auto;overflow:visible}
+  .map-marker{cursor:default;outline:none;transform-box:fill-box;transform-origin:center;transition:transform 180ms ease}
+  .marker-ring{fill:var(--color-obsidian)}.marker-dot{fill:var(--yellow);stroke:var(--color-obsidian);stroke-width:1}.map-marker text{fill:var(--color-obsidian);font-family:'Instrument Sans',sans-serif;font-size:8px;font-weight:750;pointer-events:none}
+  .map-marker:is(:hover,:focus-visible){transform:scale(1.16)}.map-marker:focus-visible .marker-ring{stroke:var(--yellow);stroke-width:5}
+  .regional-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:1.4rem;border-top:1px solid var(--color-pebble)}
+  .regional-group{min-width:0;padding:1.15rem 1rem 0 0}.regional-group+.regional-group{padding-left:1rem;border-left:1px solid var(--color-pebble)}.regional-number{display:block;color:#735d00;font-size:.7rem;font-weight:700;letter-spacing:.12em;margin-bottom:.55rem}.regional-group h3{font-size:1rem;margin-bottom:.35rem}.regional-group p{display:flex;flex-wrap:wrap;gap:.15rem .35rem;margin:0;color:var(--color-gravel);font-size:.8rem;line-height:1.55}.city-name{outline:none}.city-name:not(:last-child)::after{content:' ·';color:var(--color-gravel)}.city-name:focus-visible{color:var(--color-obsidian);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:3px}
+  .coverage-visual:has(.city-jabodetabek:is(:hover,:focus-visible)) .marker-jabodetabek,.coverage-visual:has(.city-bandung:is(:hover,:focus-visible)) .marker-bandung,.coverage-visual:has(.city-semarang:is(:hover,:focus-visible)) .marker-semarang,.coverage-visual:has(.city-surabaya:is(:hover,:focus-visible)) .marker-surabaya,.coverage-visual:has(.city-medan:is(:hover,:focus-visible)) .marker-medan,.coverage-visual:has(.city-palembang:is(:hover,:focus-visible)) .marker-palembang,.coverage-visual:has(.city-balikpapan:is(:hover,:focus-visible)) .marker-balikpapan,.coverage-visual:has(.city-makassar:is(:hover,:focus-visible)) .marker-makassar{transform:scale(1.16)}
+  @media(max-width:960px){.coverage-layout{grid-template-columns:1fr}.coverage-copy{padding-top:0}.coverage-copy h2{max-width:17ch}.coverage-intro{max-width:62ch}.coverage-summary{max-width:520px}.coverage-disclaimer--desktop{display:none}.coverage-disclaimer--mobile{display:block;margin:1.75rem 0 0;max-width:70ch}}
+  @media(max-width:620px){.service-coverage{padding-block:4rem}.coverage-layout{gap:2rem}.coverage-copy h2{font-size:clamp(2rem,10vw,3rem);max-width:15ch}.coverage-summary{margin-top:2rem}.map-frame{margin-inline:-.35rem;padding:.3rem}.regional-list{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:1.25rem}.regional-group:nth-child(3){border-left:0;padding-left:0}.map-marker text{font-size:9px}}
+  @media(prefers-reduced-motion:reduce){.map-marker{transition:none}}
+</style>

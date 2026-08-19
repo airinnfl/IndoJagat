@@ -1,0 +1,16 @@
+@media (min-width:1024px){
+  .page-home .industry-editorial-grid{
+    grid-template-columns:repeat(12,minmax(0,1fr))!important;
+    grid-template-rows:260px 260px 320px!important;
+    grid-template-areas:
+      "construction construction construction construction construction construction construction mining mining mining mining mining"
+      "construction construction construction construction construction construction construction warehouse warehouse warehouse warehouse warehouse"
+      "agriculture agriculture agriculture agriculture infrastructure infrastructure infrastructure infrastructure lifting lifting lifting lifting"!important;
+  }
+  .page-home .industry-tile--construction{grid-area:construction!important}
+  .page-home .industry-tile--mining{grid-area:mining!important}
+  .page-home .industry-tile--warehouse{grid-area:warehouse!important}
+  .page-home .industry-tile--agriculture{grid-area:agriculture!important}
+  .page-home .industry-tile--infrastructure{grid-area:infrastructure!important}
+  .page-home .industry-tile--lifting{grid-area:lifting!important}
+}

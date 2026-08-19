@@ -1,0 +1,5 @@
+---
+import {publishedArticles} from '../../data/articles';
+export function getStaticPaths(){return publishedArticles().map(article=>({params:{slug:article.slug},props:{slug:article.slug}}));}
+return Astro.redirect(`/blog/${Astro.params.slug}/`,301);
+---

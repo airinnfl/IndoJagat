@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import ProductCard from '../../components/product/ProductCard.astro';
+import {products,industryFilters,catalogDisclaimer} from '../../data/products';
+---
+<BaseLayout title="Katalog Alat Berat | Indo Jagat" description="Delapan kategori rental alat berat untuk konstruksi, pertambangan, perkebunan, warehouse, lifting, dan transportasi.">
+ <Breadcrumb items={[{label:'Produk'}]}/>
+ <header class="page-hero"><div class="container"><p class="eyebrow">8 produk · katalog demonstrasi</p><h1>Alat berat untuk kebutuhan proyek.</h1><p class="lead">Pilih unit berdasarkan pekerjaan dan industri. Tim kami membantu meninjau konfigurasi serta model penyediaannya.</p></div></header>
+ <section class="section"><div class="container"><div class="catalog-filters" role="group" aria-label="Filter produk berdasarkan industri">{industryFilters.map((filter,i)=><button type="button" class:list={['catalog-filter',i===0&&'active']} data-filter={filter.value} aria-pressed={i===0?'true':'false'}>{filter.label}</button>)}</div><div class="results-head"><strong><span id="count">{products.length}</span> produk</strong></div><div id="product-grid" class="grid grid-3">{products.map(p=><ProductCard product={p}/>)}</div><div id="empty" class="empty" hidden><h2>Produk tidak ditemukan</h2><p>Pilih filter lain untuk melihat kategori yang sesuai.</p></div><p class="catalog-disclaimer">{catalogDisclaimer}</p></div></section>
+</BaseLayout>
+<script>
+ const buttons=[...document.querySelectorAll<HTMLButtonElement>('.catalog-filter')],cards=[...document.querySelectorAll<HTMLElement>('.result-card')],count=document.querySelector<HTMLElement>('#count')!,empty=document.querySelector<HTMLElement>('#empty')!;
+ function filterProducts(value:string){let visible=0;cards.forEach(card=>{const show=!value||(card.dataset.industries??'').split('|').includes(value);card.hidden=!show;if(show)visible++});count.textContent=String(visible);empty.hidden=visible>0;buttons.forEach(button=>{const active=button.dataset.filter===value;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active))})}
+ buttons.forEach(button=>button.addEventListener('click',()=>filterProducts(button.dataset.filter??'')));
+ const industryQuery=new URLSearchParams(location.search).get('industri');
+ const industryMap:Record<string,string>={'konstruksi':'Konstruksi','pertambangan-quarry':'Pertambangan','pertanian-perkebunan':'Pertanian & Perkebunan','warehouse-manufaktur':'Warehouse & Industri','infrastruktur-jalan':'Infrastruktur & Jalan','lifting-logistik':'Lifting & Transportasi'};
+ if(industryQuery&&industryMap[industryQuery])filterProducts(industryMap[industryQuery]);
+</script>
+<style>.catalog-filters{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}.catalog-filter{min-height:44px;padding:.65rem 1rem;border:1px solid var(--color-pebble);background:transparent;color:inherit;cursor:pointer;font-weight:600}.catalog-filter:hover,.catalog-filter:focus-visible,.catalog-filter.active{background:var(--color-obsidian);border-color:var(--color-obsidian);color:var(--color-text-on-dark)}.catalog-filter:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}.catalog-disclaimer{max-width:78ch;margin:2.5rem 0 0;color:var(--color-gravel);font-size:.85rem}.product-summary{color:var(--color-graphite)}@media(max-width:600px){.catalog-filters{display:grid;grid-template-columns:1fr}.catalog-filter{text-align:left}}</style>

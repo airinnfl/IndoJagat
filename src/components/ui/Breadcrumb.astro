@@ -1,0 +1,6 @@
+---
+const {items=[]}=Astro.props;
+const path=Astro.url.pathname;
+const breadcrumbItems=path.startsWith('/rental/')&&items[0]?.label!=='Produk'?[{label:'Produk',href:'/produk/'},...items]:items;
+---
+<nav class="container breadcrumb" aria-label="Breadcrumb"><a href="/">Beranda</a> {breadcrumbItems.map((i:any)=><span> / {i.href?<a href={i.href}>{i.label}</a>:i.label}</span>)}</nav>

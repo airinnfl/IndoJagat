@@ -1,0 +1,4 @@
+---
+const {eyebrow,title,link,linkText='Lihat semua'}=Astro.props;
+---
+<div class="section-head"><div><p class="eyebrow">{eyebrow}</p><h2>{title}</h2></div>{link&&<a href={link}>{linkText} <span class="arrow">→</span></a>}</div>

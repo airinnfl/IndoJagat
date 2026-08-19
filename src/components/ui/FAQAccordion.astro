@@ -1,0 +1,4 @@
+---
+const {items}=Astro.props;
+---
+<div class="faq">{items.map((i:string[])=><details><summary>{i[0]}</summary><p>{i[1]}</p></details>)}</div>

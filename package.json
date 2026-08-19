@@ -1,0 +1,1 @@
+{"name":"indo-jagat","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"astro dev","check":"astro check","build":"astro check && astro build","preview":"astro preview"},"dependencies":{"@astrojs/check":"^0.9.4","astro":"^5.12.0","typescript":"^5.8.3"}}

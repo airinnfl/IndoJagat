@@ -1,0 +1,39 @@
+---
+const primaryNavigation = [
+  { label: 'Produk', href: '/produk/' },
+  { label: 'Layanan', href: '/layanan/' },
+  { label: 'About Us', href: '/tentang/' },
+  { label: 'Blog', href: '/blog/' },
+];
+const headerCta = { label: 'Contact Us', href: '/kontak/' };
+const path = Astro.url.pathname;
+const isActive = (href: string) => href === '/produk/'
+  ? path.startsWith('/produk/') || path.startsWith('/rental/')
+  : path.startsWith(href);
+---
+<header class="header">
+  <div class="container nav">
+    <a class="logo" href="/" aria-label="Indo Jagat beranda"><img src="/images/brand/indo-jagat-logo-light.png" alt="Indo Jagat" width="1165" height="282" /></a>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      {primaryNavigation.map(({label,href})=><a class:list={[isActive(href)&&'active']} aria-current={isActive(href)?'page':undefined} href={href}>{label}</a>)}
+      <a class:list={['btn','btn-primary','header-cta',path.startsWith(headerCta.href)&&'active']} aria-current={path.startsWith(headerCta.href)?'page':undefined} href={headerCta.href}>{headerCta.label}</a>
+    </nav>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"><span>Menu</span><i aria-hidden="true"></i></button>
+  </div>
+  <nav id="mobile-menu" class="mobile-panel" aria-label="Navigasi mobile" aria-hidden="true">
+    {primaryNavigation.map(({label,href})=><a class:list={[isActive(href)&&'active']} aria-current={isActive(href)?'page':undefined} href={href}>{label}</a>)}
+    <a class:list={['btn','btn-primary',path.startsWith(headerCta.href)&&'active']} aria-current={path.startsWith(headerCta.href)?'page':undefined} href={headerCta.href}>{headerCta.label}</a>
+  </nav>
+</header>
+<script>
+  const button=document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu=document.querySelector<HTMLElement>('#mobile-menu');
+  const header=document.querySelector<HTMLElement>('.header');
+  const updateHeader=()=>header?.classList.toggle('is-scrolled',window.scrollY>24);
+  updateHeader();window.addEventListener('scroll',updateHeader,{passive:true});
+  const focusable=()=>[...(menu?.querySelectorAll<HTMLElement>('a,button')??[])];
+  const closeMenu=()=>{if(!menu?.classList.contains('open'))return;menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.classList.remove('menu-open');button?.setAttribute('aria-expanded','false');button?.focus()};
+  button?.addEventListener('click',()=>{const open=menu?.classList.toggle('open')??false;button.setAttribute('aria-expanded',String(open));menu?.setAttribute('aria-hidden',String(!open));document.body.classList.toggle('menu-open',open);if(open)focusable()[0]?.focus()});
+  menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{menu.classList.remove('open');menu.setAttribute('aria-hidden','true');document.body.classList.remove('menu-open');button?.setAttribute('aria-expanded','false')}));
+  document.addEventListener('keydown',event=>{if(!menu?.classList.contains('open'))return;if(event.key==='Escape'){event.preventDefault();closeMenu();return}if(event.key==='Tab'){const items=focusable();if(!items.length)return;const first=items[0],last=items[items.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}});
+</script>
